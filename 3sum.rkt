@@ -1,13 +1,5 @@
 #lang racket
 
-; a + b + c = 0
-;; a + b = - c
-;; (define (f l n)
-;;   (cond
-;;     [(car l) (f (rest l) 0)]))
-;; 3 '(1) 4
-
-
 ;; 找出 l 中值为 x 的下标
 (define (eq-v x l i)
   (cond
