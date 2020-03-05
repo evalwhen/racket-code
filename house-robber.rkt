@@ -29,3 +29,9 @@
                                                          (cont (max v1 (+ (car l) v2)))))))]))
 
 (robe '(2 7 9 3 1))
+
+(define (fib n)
+  (cond
+    [(<= n 1) 1]
+    [else (+ (fib (- n 1))
+             (fib (- n 2)))]))
