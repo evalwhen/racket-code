@@ -1,5 +1,6 @@
 #lang racket
 
+;; 是 all-substring 的改进版
 (define (longest-p s)
   (let loop1 ([s s]
               [len (string-length s)])
@@ -11,6 +12,8 @@
            [(non-empty-string? sub) sub]
            [else (loop1 s (sub1 len))]))])))
 
+;; 找到所有 s 中长度为 j - i 的字串中的第一个回文串
+;; 是 substring-of-same-length 的改进版
 (define (f s i j)
   (cond
     [(> j (string-length s)) ""]
@@ -31,6 +34,7 @@
                        (string-ref s (- j 1)))
                (is-sp s (+ i 1) (- j 1)))]))
 
+;; 找到 s 的所有字串
 (define (all-substring s)
   (let loop1 ([s s]
              [len (string-length s)]
@@ -41,7 +45,7 @@
                    (sub1 len)
                    (substring-of-same-length s 0 len res))])))
 
-;; 返回 s 的所有长度为 （j - i) 的字串, (j-i) 不能大于 s 的长度
+;; 返回 s 的所有长度为 （j - i) 的字串
 (define (substring-of-same-length s i j res)
   (cond
     [(> j (string-length s)) res]
