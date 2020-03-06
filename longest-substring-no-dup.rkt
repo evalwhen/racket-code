@@ -26,6 +26,7 @@
 
 
 
+;; slowly
 (define (no-dup s)
   (no-dup-char-list? (string->list s) (string-length s)))
 
