@@ -1,6 +1,7 @@
 #lang racket
 
 ;; 是 all-substring 的改进版
+;; 思路：从 s 的最长字串开始扫描，一旦发现回文串，立马返回。
 (define (longest-p s)
   (let loop1 ([s s]
               [len (string-length s)])
