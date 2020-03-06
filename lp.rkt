@@ -1,5 +1,26 @@
 #lang racket
 
+(define (longest-p s)
+  (let loop1 ([s s]
+              [len (string-length s)])
+    (cond
+      [(= len 0) ""]
+      [else
+       (let ([sub (f s 0 len)])
+         (cond
+           [(non-empty-string? sub) sub]
+           [else (loop1 s (sub1 len))]))])))
+
+(define (f s i j)
+  (cond
+    [(> j (string-length s)) ""]
+    [else
+     (let ([sub (substring s i j)])
+       (cond
+        [(is-sp sub 0 (- j i)) sub]
+        [else (f s (add1 i) (add1 j))]))]))
+
+
 (define (is-sp s i j)
   (cond
     [(= j 0) false]
