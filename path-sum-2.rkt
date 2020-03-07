@@ -1,16 +1,3 @@
-#lang racket
-
-;; https://leetcode.com/problems/path-sum/
-(define (has-path-sum t n)
-  (cond
-    [(null? t) false]
-    [else
-     (cond
-       [(and (is-leaf t) (= (node-value t) n)) true]
-       [else (or (has-path-sum (node-left-tree t) (- n (node-value t)))
-                 (has-path-sum (node-right-tree t) (- n (node-value t))))])]))
-
-;; res = '(() () () ...)
 (define (sum-path t n res)
   (cond
     [(null? t ) res]
