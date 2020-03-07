@@ -1,25 +1,5 @@
 #lang racket
 
-;; (define (path-nums t n counter)
-;;   (cond
-;;     [(null? t) counter]
-;;     [else
-;;      (cond
-;;        [(= n (node-value t)) (path-nums
-;;                               (node-left-tree t)
-;;                               (- n (node-value t))
-;;                               (path-nums
-;;                                (node-right-tree t)
-;;                                (- n (node-value t))
-;;                                (+ counter 1)))]
-;;        [else  (path-nums
-;;                (node-left-tree t)
-;;                (- n (node-value t))
-;;                (path-nums
-;;                 (node-right-tree t)
-;;                 (- n (node-value t))
-;;                 counter))])]))
-
 (define (path-nums t n)
   (define (helper t n)
     (cond
