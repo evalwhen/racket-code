@@ -21,8 +21,8 @@
                                                 res))]
        [(is-leaf t)
         (if (= n (node-value t))
-            (sum-path2 '() n '() (cons (reverse (cons (node-value t) cur))
-                                       res))
+            (cons (reverse (cons (node-value t) cur))
+                  res)
             res)])]))
 (define (prefix-list n ll)
   (cond
