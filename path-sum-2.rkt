@@ -1,3 +1,5 @@
+#lang racket
+
 (define (sum-path t n res)
   (cond
     [(null? t ) res]
@@ -7,23 +9,25 @@
        [else (append (prefix-list (node-value t) (sum-path (node-left-tree t) (- n (node-value t)) res))
                      (prefix-list (node-value t) (sum-path (node-right-tree t) (- n (node-value t)) res)))])]))
 
+
 (define (sum-path2 t n cur res)
   (cond
     [(null? t) res]
     [else
      (cond
-       [(not (is-leaf t)) (sum-path2 (node-left-tree t)
-                                     (- n (node-value t))
-                                     (cons (node-value t) cur)
-                                     (sum-path2 (node-right-tree t)
-                                                (- n (node-value t))
-                                                (cons (node-value t) cur)
-                                                res))]
+       [(is-internal t) (sum-path2 (node-left-tree t)
+                                   (- n (node-value t))
+                                   (cons (node-value t) cur)
+                                   (sum-path2 (node-right-tree t)
+                                              (- n (node-value t))
+                                              (cons (node-value t) cur)
+                                              res))]
        [(is-leaf t)
         (if (= n (node-value t))
             (cons (reverse (cons (node-value t) cur))
                   res)
             res)])]))
+
 (define (prefix-list n ll)
   (cond
     [(null? ll) '()]
@@ -43,6 +47,9 @@
   (and (null? (node-left-tree nd))
        (null? (node-right-tree nd))))
 
+(define (is-internal nd)
+  (not (is-leaf nd)))
+
 (define a-tree
   '(5 (4 (11 (7 ()
                 ())
@@ -55,4 +62,3 @@
             (5 ()
                ())))))
 
-(has-path-sum a-tree 5)
