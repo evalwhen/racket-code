@@ -15,6 +15,26 @@
         (path-nums (node-left-tree t) n)
         (path-nums (node-right-tree t) n))]))
 
+;; tail call
+(define (path-nums2 t n)
+  (define (helper t n counter)
+    (cond
+      [(null? t) counter]
+      [else
+       (helper (node-left-tree t)
+               (- n (node-value t))
+               (helper (node-right-tree t)
+                       (- n (node-value t))
+                       (if (= n (node-value t))
+                           (+ counter 1)
+                           counter)))]))
+  (cond
+    [(null? t) 0]
+    [else
+     (+ (helper t n 0)
+        (path-nums (node-left-tree t) n)
+        (path-nums (node-right-tree t) n))]))
+
 (define (node-value nd)
   (car nd))
 
