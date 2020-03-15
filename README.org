@@ -1,1 +1,1 @@
-boring leetcode.   
+Boring LeetCode.   
