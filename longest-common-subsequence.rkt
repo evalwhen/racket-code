@@ -45,6 +45,10 @@
                                         (sub1 sl)
                                         tl)])
                       (cond
+                        ;; (max str1 str2)
                         [(> (string-length str1) (string-length str2)) str1]
                         [else str2]))])]))
   (helper s t (string-length s) (string-length t)))
+
+(module+ test
+  (lcs "abc" "ac"))
