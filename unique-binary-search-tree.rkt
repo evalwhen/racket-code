@@ -14,7 +14,7 @@
 ;; (ubs 1 2) => '((2 (1 () ()) ()) (1 () (2 () ())))
 (define (ubs start n)
   (cond
-    [(< n 1) '()]
+    [(< n 1) '(())]
     [(= n 1) (list (list start (list) (list)))]
     [else (let loop ([i 0] [res '()])
             (cond
@@ -25,21 +25,18 @@
                                              (ubs (+ start i 1) (- n i 1)))
                                   res))]))]))
 
+;; 以 mid 作为 value, left 节点列表以及 right 节点列表的组合作为左右子树，输出所有可能的树。
 (define (append-tree mid left right)
   (cond
-    [(and (null? left) (null? right)) '()]
-    [(and (null? left) (not (null? right))) (cons (list mid
-                                                        (list)
-                                                        (car right))
-                                                  (append-tree mid left (cdr right)))]
-    [(and (not (null? left)) (null? right)) (cons (list mid
-                                                        (car left)
-                                                        (list))
-                                                  (append-tree mid (cdr left) right))]
-    [else (cons (list mid
-                      (car left)
-                      (car right))
-                (append-tree mid (cdr left) (cdr right)))]))
+    [(or (null? left) (null? right)) '()]
+    [else (append (add-left-node-to-tree mid (car left) right)
+                  (append-tree mid (cdr left) right))]))
+
+(define (add-left-node-to-tree mid left-node right)
+  (cond
+    [(null? right) '()]
+    [else (cons  (list mid left-node (car right))
+                 (add-left-node-to-tree mid left-node (cdr right)))]))
 
 (module+ test
   (require rackunit)
