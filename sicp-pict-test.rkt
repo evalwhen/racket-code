@@ -90,5 +90,6 @@
     (combine4 (corner-split painter n))))
 (define my-painter (bitmap->painter "/home/melp/Downloads/1496705311.jpg"))
 (define my-painter2 (bitmap->painter "/home/melp/Downloads/1691619715.jpg"))
-(define test-painter (right-split my-painter 2))
+(define my-painter3 (bitmap->painter "/home/melp/Downloads/121613413.jpg"))
+(define test-painter (square-limit my-painter3 2))
 (paint test-painter #:width 400 #:height 400)
